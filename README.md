@@ -11,7 +11,7 @@ The *Stop Start Node* application can be applied to any environment within your 
 
 ## How to Apply Stop Start Node Actions
 
-Copy link to the **_manifest.jps_** file above and [import](https://docs.jelastic.com/environment-import) it to your Jelastic dashboard (or, alternatively, locate and launch this package via [Jelastic Marketplace](https://docs.jelastic.com/marketplace)).
+Copy link to the **_manifest.yaml_** file above and [import](https://docs.jelastic.com/environment-import) it to your Jelastic dashboard (or, alternatively, locate and launch this package via [Jelastic Marketplace](https://docs.jelastic.com/marketplace)).
 
 <p align="left"> 
 <img src="images/install.png" width="500">
