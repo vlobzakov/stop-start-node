@@ -1,7 +1,7 @@
 type: install
 name: Stop/Start Environment Nodes
+baseUrl: https://raw.githubusercontent.com/vlobzakov/stop-start-node/main
 logo: images/button-logo-black.png
-baseUrl: https://raw.githubusercontent.com/jelastic-jps/stop-start-node/master
 
 settings:
   fields:
