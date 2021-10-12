@@ -2,6 +2,9 @@ type: install
 name: Stop/Start Environment Nodes
 baseUrl: https://raw.githubusercontent.com/vlobzakov/stop-start-node/main
 logo: images/button-logo.png
+description: 
+  text: Free up unused resources as needed by stopping idle or any other specific nodes in any of your environments. This will lead to lower cloud costs and more efficient use of infrastructure.
+  short: Stop/Start specific nodes to optimize cloud costs
 
 settings:
   fields:
