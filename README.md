@@ -1,6 +1,6 @@
 
 <p align="left"> 
-<img src="images/button-logo-black.png" width="100"> 
+<img src="images/button-logo-black.png" width="70"> 
 </p>
 
 # Stop Start Node(s)
