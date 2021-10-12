@@ -1,0 +1,74 @@
+type: install
+name: Stop/Start Environment Nodes
+logo: images/button-logo-black.png
+baseUrl: https://raw.githubusercontent.com/jelastic-jps/stop-start-node/master
+
+settings:
+  fields:
+    - type: list
+      name: envName
+      caption: Environment
+      required: true
+      values: []
+
+    - type: list
+      name: nodes
+      caption: Node(s)
+      required: true
+      multiSelect: true
+      dependsOn:
+        envName: {}
+
+    - type: radiolist
+      name: action
+      value: stop
+      values:
+        - caption: Stop Node(s)
+          value: stop
+        - caption: Start Node(s)
+          value: start
+
+onBeforeInit: |
+  var resp = jelastic.env.control.GetEnvs();
+  if (resp.result !== 0) return resp;
+  var envs = [];
+  var nodes = {};
+
+  for (var i = 0, envInfo, env; envInfo = resp.infos[i]; i++) {
+    env = envInfo.env;
+
+    if (env.status == 1) {
+      for (var j = 0, node; node = envInfo.nodes[j]; j++) {
+        nodes[env.envName] = nodes[env.envName] || [];
+        nodes[env.envName].push({
+          value: node.id,
+          nodeGroup: node.nodeGroup,
+          caption: (node.displayName || node.name) + ' (' + node.id + ')'
+        });
+      }
+
+      if (nodes[env.envName] && nodes[env.envName].length > 0) {
+        envs.push({
+          value: env.envName,
+          caption: (env.displayName || env.envName)
+        });
+      }
+    }
+  }
+
+  if (envs.length > 0) {
+    jps.settings.fields[0].values = envs;
+    jps.settings.fields[0].value = envs[0].value;
+    jps.settings.fields[1].dependsOn.envName = nodes;
+  }
+
+  return { result: 0, settings: jps.settings };
+
+onInstall:
+  switch(${settings.action}):
+    stop:
+      env.control.StopNode[${settings.nodes}]:
+        envName: ${settings.envName}
+    start:
+      env.control.StartNode[${settings.nodes}]:
+        envName: ${settings.envName}
